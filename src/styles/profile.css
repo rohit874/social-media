@@ -1,0 +1,95 @@
+.profile_header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--background);
+}
+.profile_cover{
+    width: 100%;
+    height: 200px;
+    object-fit:cover;
+}
+.profile_title{
+    margin-left: 17px;
+    color: var(--text);
+}
+.profile_title span{
+    font-size: 13px;
+}
+.profile_img_div{
+    display: flex;
+    justify-content: space-between;
+}
+.profile_pic{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-top: -65px;
+    object-fit: cover;
+    object-position: center;
+    border: 4px solid var(--theme);
+}
+.profile_name{
+    display: flex;
+    align-items: center;
+    color: var(--text);
+}
+.verified{
+    width: 20px;
+    height: 20px;
+    fill: var(--primary);
+    margin: 5px;
+}
+.profile_title button{
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 30px;
+    outline: none;
+    border: 1px solid var(--shadow);
+    color: var(--text);
+    margin: 10px 20px;
+    cursor: pointer;
+}
+.profile_title button:hover{
+    color: white;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+}
+.profile_more_info{
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile_more_info span{
+    margin: 5px 15px 5px 0;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    color: var(--text);
+}
+.profile_more_info span span{
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: 600;
+}
+.svg{
+    fill: var(--text);
+    width: 18px;
+    height: 18px;
+    margin: 0 3px 0 0;
+}
+.profile_tweets a:hover{
+    background-color: var(--hover);
+}
+.profile_tweet_header{
+    border-bottom: 1px solid var(--background);
+    margin-top: 20px;
+}
+.profile_tweet_header h4{
+    margin: 5px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+}

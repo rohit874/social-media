@@ -1,0 +1,237 @@
+
+
+nav{
+    max-width: 250px;
+    flex: 2;
+    height: 90vh;
+    position: sticky;
+    top: 0;
+}
+.navHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.twitter_icon{
+  margin: 5px 20px;
+  width: 28px;
+  height: 28px;
+  fill: var(--primary);
+  background: transparent;
+}
+.cut_icon{
+  margin: 10px;
+  width: 20px;
+  height: 20px;
+  fill: var(--text);
+  background: transparent;
+}
+.nav_icon{
+    padding: 5px;
+    margin: 6px 5px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+}
+
+.navlinks{
+  margin: 10px;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.navlink{
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+  border-radius: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 400;
+  fill: var(--text);
+}
+.navlink:hover{
+  background-color: var(--background);
+}
+.navlink.active{
+  color: var(--primary);
+  font-weight: 500;
+  fill: var(--primary);
+}
+.navlink .MuiSvgIcon-root{
+  background-color: transparent;
+  margin: 7px 5px 7px 10px;
+  color: inherit;
+  font-size: 25px;
+}
+.navlink h2{
+  background-color: transparent;
+  color: inherit;
+  margin: 0 10px;
+  font-size: 17px;
+  font-weight: inherit;
+}
+.tweet_btn_div{
+  text-align: center;
+  display: block;
+}
+.tweet_btn{
+ background-color: var(--primary);
+ padding: 10px;
+ margin: 10px 20px;
+ color: white;
+ border-radius: 30px;
+ border: none;
+ outline: none;
+ cursor: pointer;
+ width: 180px;
+}
+
+.theme-switch{
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+}
+.theme-icon{
+    margin: 5px;
+    color: var(--text);
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 12px;
+}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 3px;
+  top: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.home_section{
+    display: flex;
+    flex-wrap: wrap;
+}
+.nav_profile{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.nav_profile > a{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 3px 8px;
+}
+.nav_profile > a:hover{
+  background-color: var(--background);
+}
+.nav_profile > a > div{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  background-color: transparent;
+}
+.nav_profile img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav_profile h5{
+  font-size: 11px;
+  color: var(--text);
+  margin-right: 2px;
+  background-color: transparent;
+}
+.nav_profile span{
+  font-size: 10px;
+  color: var(--text);
+  background-color: transparent;
+}
+
+.logout_btn{
+  width: 60px;
+  padding:4px;
+  border-radius: 30px;
+  border: 1px solid var(--shadow);
+  outline: none;
+  font-size: 11px;
+  margin:  15px;
+  cursor: pointer;
+  color: var(--text);
+}
+.logout_btn:hover{
+  border: 1px solid var(--primary);
+  background-color:  var(--primary);
+  color: white;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  nav{
+    position: absolute;
+    max-width: 0px;
+    height: 100vh;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    transition: 0.4s;
+    border-right: 1px solid var(--background);
+  }
+  .navHeader{
+    flex-direction: row-reverse;
+  }
+}

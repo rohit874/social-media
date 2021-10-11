@@ -1,0 +1,105 @@
+.posts a{
+    text-decoration: none;
+    cursor: pointer;
+}
+.posts a:hover{
+    background-color: var(--hover);
+}
+.post{
+    display: flex;
+    padding: 10px 10px 5px 10px;
+    border-bottom: 1px solid var(--background);
+}
+.post:hover{
+    background-color: inherit;
+}
+.post > img{
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+.post_details{
+    width: 100%;
+    max-width: 510px;
+    margin: 0 10px;
+    background-color: transparent;
+}
+.post_details img{
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 30px;
+    margin-top: 5px;
+}
+.posted_by{
+    display: flex;
+    color: var(--text);
+    background-color: transparent;
+}
+.posted_by h4{
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+}
+.posted_by span{
+    background-color: transparent;
+    font-size: 13px;
+    font-weight: 400;
+}
+.posted_by span:hover{
+    text-decoration: underline;
+}
+.post_details p{
+    background-color: transparent;
+    color: var(--text);
+    margin: 5px 0;
+    font-size: 13px;
+}
+.post_bottom{
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    color: var(--text);
+}
+.post_bottom div{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+.post_bottom span{
+    background-color: transparent;
+    margin-left: 5px;
+    font-size: 12px;
+    color: var(--text);
+}
+.post-icons{
+    padding: 5px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: transparent;
+    fill: var(--text);
+}
+.liked_icon{
+    padding: 5px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: transparent;
+    fill: #f83475;
+}
+.post-icons:hover{
+    background: #4ce64c50;
+    fill: rgb(3, 196, 3);
+}
+.liked_icon:hover{
+    background: #f8347569;
+}

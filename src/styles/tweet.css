@@ -1,0 +1,70 @@
+.tweet_head{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+.tweet_head img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin: 3px 0;
+}
+
+.tweet_posted_by{
+    margin: 0 10px;
+    color: var(--text);
+    background-color: transparent;
+}
+.tweet_posted_by h4{
+    font-size: 14px;
+    line-height: 12px;
+    font-weight: 600;
+    background-color: transparent;
+}
+.tweet_posted_by span{
+    font-size: 13px; 
+    background-color: transparent;
+}
+.tweet_posted_by a{
+    text-decoration: none;
+    font-size: 13px; 
+    background-color: transparent;
+    color: inherit;
+}
+.tweet_date_likes{
+    margin: 10px 0 0 0;
+    padding-bottom: 10px;
+    background-color: transparent;
+}
+.tweet_date_likes span{
+    background-color: transparent;
+    color: var(--text);
+    font-size: 13px;
+}
+.tweet_date_likes p span{
+    font-weight: 600;
+    background-color: transparent;
+}
+.comment_btn{
+    font-size: 12px;
+    padding: 7px 0px !important;
+    width: 90px !important;
+}
+.reply_h{
+    margin: 10px 10px 20px 10px;
+    font-size: 13px;
+    color: var(--text);
+}
+.reply_h span{
+    color: var(--primary);
+}
+.no_comment{
+    text-align: center;
+    margin: 20px;
+    font-size: 13px;
+    color: var(--text);
+}

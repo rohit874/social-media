@@ -18,7 +18,7 @@ function Search() {
             'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
           }};
       
-          axios.post("http://localhost:5000/search",data, config)
+          axios.post("https://social-media-rk.herokuapp.com/search",data, config)
           .then(res => {
               setResult(res.data.peoples);
       })

@@ -30,7 +30,7 @@ function Home({setNavStyle}) {
             },
           };
       axios.post(
-      "http://localhost:5000/post",
+      "https://social-media-rk.herokuapp.com/post",
       data,
       config).then(res => {
         setSelectedFile(null);
@@ -76,7 +76,7 @@ function Home({setNavStyle}) {
                 }};
             
                 try {
-                  const response = await axios.get(`http://localhost:5000/getpost`,config);
+                  const response = await axios.get(`https://social-media-rk.herokuapp.com/getpost`,config);
                   setPostData(response.data.res);
                 } catch (err) {
                   console.log(err.response.data.message);
@@ -120,7 +120,7 @@ function Home({setNavStyle}) {
                   <div className="post_btns">
                   <label>
                   <InsertImgIcon className="insert_img_icon" />
-                    <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} name='image' />
+                    <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} accept="image/png, image/jpeg" name='image' />
                   </label>
                        <button onClick={postHandler}>Post</button></div> 
                 </div>

@@ -21,3 +21,5 @@ export  { ReactComponent as LikeIcon } from './like_icon.svg';
 export  { ReactComponent as ShareIcon } from './share_icon.svg';
 export  { ReactComponent as LikedIcon } from './liked_icon.svg';
 export  { ReactComponent as LoadingIcon } from './loading_icon.svg';
+export  { ReactComponent as Bird1Icon } from './bird1_icon.svg';
+export  { ReactComponent as Bird2Icon } from './bird2_icon.svg';

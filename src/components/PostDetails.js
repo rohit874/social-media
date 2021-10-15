@@ -41,7 +41,7 @@ function PostDetails() {
                 }};
             
                 try {
-                  const response = await axios.get(`http://localhost:5000/postdetails/${postid}`,config);
+                  const response = await axios.get(`https://social-media-rk.herokuapp.com/postdetails/${postid}`,config);
                 setPostDetails(response.data.data);
                 setCommentsData(response.data.data.comments);
                 } catch (err) {
@@ -66,7 +66,7 @@ function PostDetails() {
                 'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
               }};
           
-              axios.post("http://localhost:5000/like",data, config)
+              axios.post("https://social-media-rk.herokuapp.com/like",data, config)
               .then(res => {
           })
           .catch(err => {
@@ -91,7 +91,7 @@ function PostDetails() {
             },
           };
       axios.post(
-      "http://localhost:5000/comment",
+      "https://social-media-rk.herokuapp.com/comment",
       data,
       config).then(res => {
         setSelectedFile(null);
@@ -183,12 +183,12 @@ function PostDetails() {
         <div className="tweet_div">
                 <img src={currentUser.profile_image} alt="" />
                 <div className="tweet_post">
-                    <textarea onChange={(e)=>setText(e.target.value)} onKeyUp={(e)=>adjustHeight(e)} ref={textAreaRef} value={text} placeholder="What's happening?"></textarea>
+                    <textarea onChange={(e)=>setText(e.target.value)} onKeyUp={(e)=>adjustHeight(e)} ref={textAreaRef} value={text} placeholder="Post your reply?"></textarea>
                     {selectedFile &&  <img className="preview_img" src={preview} alt="" /> }
                   <div className="post_btns">
                   <label>
                   <InsertImgIcon className="insert_img_icon" />
-                    <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} name='image' />
+                    <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} accept="image/png, image/jpeg" name='image' />
                   </label>
                        <button className="comment_btn" onClick={commentHandler}>Comment</button></div> 
                 </div>

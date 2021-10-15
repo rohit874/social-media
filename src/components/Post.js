@@ -34,7 +34,7 @@ function Post({postId,userid,userImg,userName,text,postImg,comments,likes,time})
                 'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
               }};
           
-              axios.post("http://localhost:5000/like",data, config)
+              axios.post("https://social-media-rk.herokuapp.com/like",data, config)
               .then(res => {
           })
           .catch(err => {
@@ -49,7 +49,7 @@ function Post({postId,userid,userImg,userName,text,postImg,comments,likes,time})
             <div className="post_details">
                 <div className="posted_by"><h4>{userName}</h4>&nbsp;<span onClick={(e)=>{e.preventDefault();history.push(`/${userid}`)}}>@{userid} .&nbsp;</span><span>{time}</span></div>
                 <p>{text}</p>
-                {postImg!=="http://localhost:5000/" ? <img src={postImg} alt="" />:""}
+                {postImg!=="https://social-media-rk.herokuapp.com/" ? <img src={postImg} alt="" />:""}
                 <div className="post_bottom">
                     <div><CommentIcon className="post-icons" /><span>{comments}</span></div>
                     <div><RetweetIcon onClick={(e)=>e.preventDefault()} className="post-icons" /><span></span></div>

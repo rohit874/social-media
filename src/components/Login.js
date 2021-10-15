@@ -21,14 +21,25 @@ function Login({setIsLogin}) {
     const inputClicked=(label)=>{
         setlabel_class({...label_class, [label] :"formLabel_focus"});
     }
-    const [email,SetEmail] = useState("");
-    const [password,SetPassword] = useState("");
+    let [email,SetEmail] = useState("");
+    let [password,SetPassword] = useState("");
     const [error, setError] = useState("");
+
+    function GuestLogin(e){
+      e.preventDefault();
+      email = "rk@gmail.com";
+      password = "12345678";
+       LoginHandler(e,true);
+    }
 
 
     const LoginHandler = async (e) =>{
         e.preventDefault();
         if (!email || !password) {
+          setError("please fill email and password");
+          setTimeout(() => {
+            setError("");
+          }, 5000);
           return;
         }
         const config = {
@@ -39,7 +50,7 @@ function Login({setIsLogin}) {
           };
 
           try {
-            const res = await axios.post('http://localhost:5000/login', { email, password }, config);
+            const res = await axios.post('https://social-media-rk.herokuapp.com/login', { email, password }, config);
             localStorage.setItem("authToken", res.data.access_token);
             setIsLogin(true);
             history.push('/');
@@ -75,9 +86,12 @@ function Login({setIsLogin}) {
             <input type="password" onClick={()=>inputClicked("password_label")} onChange={(e)=>SetPassword(e.target.value)} value={password} name="password" placeholder="" autoComplete="off"/>
             </div>
     
-            <div className="signup_btn_div"><button onClick={LoginHandler} className="signup_btn">Login</button></div>
+            <div className="signup_btn_div">
+              <button onClick={(e)=>LoginHandler(e)} className="signup_btn">Login</button>
+              <button onClick={(e)=>GuestLogin(e)} className="signup_btn">Login as Guest</button>
+              </div>
             </form>
-            <p className="signup_have">New to Messenger? <Link to="/signup">Create account</Link></p>
+            <p className="signup_have">New to Hummingbird? <Link to="/signup">Create account</Link></p>
         </div>
         </div>
     )

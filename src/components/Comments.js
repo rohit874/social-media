@@ -32,7 +32,7 @@ function Comments({commentid,userid,userImg,userName,text,postImg,comments,likes
                 'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
               }};
           
-              axios.post("http://localhost:5000/comment-like",data, config)
+              axios.post("https://social-media-rk.herokuapp.com/comment-like",data, config)
               .then(res => {
           })
           .catch(err => {
@@ -47,7 +47,7 @@ function Comments({commentid,userid,userImg,userName,text,postImg,comments,likes
             <div className="post_details">
                 <div className="posted_by"><h4>{userName}</h4>&nbsp;<span>@{userid} .&nbsp;</span><span>{time}</span></div>
                 <p>{text}</p>
-                {postImg!=="http://localhost:5000/"?<img src={postImg} alt="" />:""}
+                {postImg!=="https://social-media-rk.herokuapp.com/"?<img src={postImg} alt="" />:""}
                 <div className="post_bottom">
                     <div><CommentIcon className="post-icons" /><span>{comments}</span></div>
                     <div><RetweetIcon className="post-icons" /><span></span></div>

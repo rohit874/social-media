@@ -234,4 +234,7 @@ input:checked + .slider:before {
   .navHeader{
     flex-direction: row-reverse;
   }
+.twitter_icon{
+  display: none;
+}
 }

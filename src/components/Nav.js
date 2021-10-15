@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/nav.css';
-import  { TwitterIcon, HomeIcon, ExploreIcon , NotificationIcon, MessageIcon, BookmarksIcon, ListsIcon, ProfileIcon, MoreIcon, CutIcon } from '../icons';
+import  { HomeIcon, ExploreIcon ,Bird1Icon, NotificationIcon, MessageIcon, BookmarksIcon, ListsIcon, ProfileIcon, MoreIcon, CutIcon } from '../icons';
 import { userContext } from '../userContext';
 
 function Nav({ navStyle, setNavStyle, Logout }) {
@@ -42,7 +42,7 @@ function Nav({ navStyle, setNavStyle, Logout }) {
           <div className="navHeader">
             {
               navStyle?<CutIcon onClick={()=>setNavStyle(false)} className="cut_icon" />
-              :<TwitterIcon className="twitter_icon" />
+              :<Bird1Icon className="twitter_icon" />
             }
           <div className="theme-switch">
             <span className="theme-icon">&#9728;</span>
@@ -65,7 +65,7 @@ function Nav({ navStyle, setNavStyle, Logout }) {
          {/* <button className="tweet_btn">Tweet</button> */}
          { currentUser ?
          <div className="nav_profile">
-         <NavLink to={`/${currentUser?.username}`} exact>
+         <NavLink onClick={()=>setNavStyle(false)} to={`/${currentUser?.username}`} exact>
              <img src={currentUser?.profile_image} alt="" />
              <div>
                <h5>{currentUser?.name}</h5>

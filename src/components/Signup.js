@@ -49,7 +49,7 @@ function Signup(props) {
           };
 
       axios.post(
-      "http://localhost:5000/register",
+      "https://social-media-rk.herokuapp.com/register",
       data,
       config).then(res => {
         localStorage.setItem("authToken", res.data.access_token);

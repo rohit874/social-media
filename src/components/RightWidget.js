@@ -1,6 +1,6 @@
 import '../styles/right-widget.css'
-import user5 from '../images/user5.jpg';
-import user9 from '../images/user9.jpg';
+import news1 from '../images/news1.jpg';
+import news2 from '../images/news2.jpg';
 import Search from './Search';
 
 function RightWidget({hideSearch}) {
@@ -17,7 +17,7 @@ function RightWidget({hideSearch}) {
                     <h5>RRvMI: A battle for the playoffs as Rajasthan Royals take on Mumbai Indians at Sharjah</h5>
                     <span>Trending with #RRvsMI</span>
                 </div>
-                <img src={user5} alt="" />
+                <img src={news1} alt="" />
             </div>
             <div className="news">
                 <div>
@@ -25,7 +25,7 @@ function RightWidget({hideSearch}) {
                     <h5>Here's what exactly caused the six-hour Facebook outage last night</h5>
                     <span>Trending with #Facebook</span>
                 </div>
-                <img src={user9} alt="" />
+                <img src={news2} alt="" />
             </div>
             </div>
         </div>

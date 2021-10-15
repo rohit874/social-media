@@ -20,7 +20,7 @@ function Profile() {
 
     useEffect(()=>{
           const loadProfile = async () => {
-              if (!username) {
+              if (!currentUser) {
                   return;
               }
                 var config = {
@@ -30,7 +30,7 @@ function Profile() {
                   }};
               
                   try {
-                    const response = await axios.get(`http://localhost:5000/profile/${username}`,config);
+                    const response = await axios.get(`https://social-media-rk.herokuapp.com/profile/${username}`,config);
                     setFollowers(response.data.user.followers);
                     setUser(response.data.user);
                     setPostData(response.data.userPost);
@@ -39,7 +39,7 @@ function Profile() {
                   }
               }
               loadProfile();
-      },[username]);
+      },[username,currentUser]);
 
       //handling follow / unfollow
       useEffect(()=>{
@@ -56,7 +56,8 @@ function Profile() {
         setFollow(!follow)
         const data = {
             username:currentUser.username,
-            userid:user._id
+            userid:user._id,
+            currentuid:currentUser._id
         }  
         var config = {
             headers:{
@@ -64,7 +65,7 @@ function Profile() {
             'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
           }};
       
-          axios.post("http://localhost:5000/follow",data, config)
+          axios.post("https://social-media-rk.herokuapp.com/follow",data, config)
           .then(res => {
       })
       .catch(err => {

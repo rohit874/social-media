@@ -26,7 +26,7 @@ function App() {
         }};
     
         try {
-          const response = await axios.get('http://localhost:5000/getuser',config);
+          const response = await axios.get('https://social-media-rk.herokuapp.com/getuser',config);
           setCurrentUser(response.data.user);
           setIsLogin(true);
         } catch (err) {
@@ -49,15 +49,15 @@ function App() {
 return (
     <>
     <Router>
-    <userContext.Provider value={{ currentUser }}>
       <Route path="/login">
         <Login setIsLogin={setIsLogin} />
       </Route>
       <Route path="/signup">
         <Signup setIsLogin={setIsLogin} />
       </Route>
+    <userContext.Provider value={{ currentUser }}>
       <div className="app">
-      <Nav navStyle={navStyle} Logout={Logout} setNavStyle={setNavStyle}  />
+      <Nav navStyle={navStyle} Logout={Logout} setNavStyle={setNavStyle} />
       <div className="main">
     <Switch>
       <Route path="/" exact>

@@ -16,7 +16,6 @@ function Profile() {
     const [postData, setPostData] = useState([]);
     const [followers,setFollowers] = useState([]);
     const [follow,setFollow] = useState(false);
-    const [findIndxs, setFindIndxs] = useState();
 
     useEffect(()=>{
           const loadProfile = async () => {
@@ -44,20 +43,20 @@ function Profile() {
       //handling follow / unfollow
       useEffect(()=>{
         let findUser;
-        if (followers.length) {
-            findUser = followers.indexOf(currentUser.username);
+        if (currentUser?.following.length && user) {
+            findUser = currentUser.following.indexOf(user.username);
             findUser>=0 ?  setFollow(true) :  setFollow(false);
-            setFindIndxs(findUser);
         }
-      },[followers,currentUser?.username])
+      },[currentUser?.following,user])
 
       const followHandler = () =>{
-        follow ? followers.splice(findIndxs, 1) : followers.push(currentUser.username);
+        follow ?
+         currentUser.following = currentUser.following.filter((uname)=>uname!==user.username)
+          : currentUser.following = [...currentUser.following, user.username];
         setFollow(!follow)
         const data = {
-            username:currentUser.username,
-            userid:user._id,
-            currentuid:currentUser._id
+            username:user.username,
+            currentusername:currentUser.username
         }  
         var config = {
             headers:{

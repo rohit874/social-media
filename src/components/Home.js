@@ -1,5 +1,5 @@
 import '../styles/Home.css';
-import  { InsertImgIcon, LoadingIcon } from '../icons';
+import { InsertImgIcon, LoadingIcon, LoadingIcon3 } from '../icons';
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useContext, useRef } from 'react';
 import { Post } from '../components';
@@ -13,16 +13,19 @@ function Home({setNavStyle}) {
     const [text, setText] = useState("");
     const [preview, setPreview] = useState();
     const [postData, setPostData] = useState([]);
+    const [process, setProcess] = useState(false);
     let textAreaRef = useRef();
     const data = new FormData();
 
     //save new post
     const postHandler = () =>{
-        if (!selectedFile && text==="") {
+        let filert_text =  text.replace(/^\s+|\s+$/gm,'');
+        if (!selectedFile && filert_text.length===0) {
             return;
         }
+        setProcess(true);
         data.append("username", currentUser.username);
-        data.append("text", text);
+        data.append("text", filert_text);
         data.append("post_image", selectedFile);
         const config = {
             header: {
@@ -37,6 +40,7 @@ function Home({setNavStyle}) {
         setPreview(undefined);
         setText("");
         textAreaRef.current.style.height = "50px";
+        setProcess(false);
         let appendPost = {...res.data.res, name:currentUser.name, user_image:currentUser.profile_image}
         setPostData([appendPost, ...postData]);
         })
@@ -74,13 +78,22 @@ function Home({setNavStyle}) {
                   'Content-Type': 'application/json',
                   'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
                 }};
-            
                 try {
-                  const response = await axios.get(`https://social-media-rk.herokuapp.com/getpost`,config);
+                  const response = await axios.post(`https://social-media-rk.herokuapp.com/getpost`,currentUser.following,config);
                   setPostData(response.data.res);
                 } catch (err) {
                   console.log(err.response.data.message);
                 }
+                //get followers
+                // axios.post(
+                //     "http://localhost:5000/getfollowers",
+                //     currentUser.followers,
+                //     config).then(res => {
+                //         console.log(res.data);
+                //       })
+                //       .catch(err => {
+                //               console.log(err);
+                //       })
               }
             }
         loadPostData();
@@ -122,12 +135,12 @@ function Home({setNavStyle}) {
                   <InsertImgIcon className="insert_img_icon" />
                     <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} accept="image/png, image/jpeg" name='image' />
                   </label>
-                       <button onClick={postHandler}>Post</button></div> 
+                       <button onClick={postHandler}>{!process?"Post":<LoadingIcon3 className="process_icon3" />}</button></div> 
                 </div>
             </div>
             <div className="posts">
             {
-                 postData.length?
+                postData.length?
                 postData.map((data)=>{
                     let time = formatTime(data.createdAt);
                     return(

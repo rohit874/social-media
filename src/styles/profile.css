@@ -93,3 +93,8 @@
     font-weight: 500;
     color: var(--text);
 }
+@media only screen and (max-width: 767px) {
+    .profile_cover{
+        height: 140px;
+    }
+}

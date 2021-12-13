@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/auth.css'
 import { useHistory } from 'react-router';
+import {ReactComponent as LoadingIcon} from '../icons/loading_icon2.svg';
 
 function Signup(props) {
     //styling on form inputs
@@ -30,8 +31,10 @@ function Signup(props) {
     const [dob,SetDob] = useState("");
     const [password,SetPassword] = useState("");
     const [error, setError] = useState("");
+    const [process,setProcess] = useState(false);
     //register user
     const SignUpHandler = async (e) =>{
+        setProcess(true);
         e.preventDefault();
         data.append("name", name);
         data.append("email", email);
@@ -53,10 +56,12 @@ function Signup(props) {
       data,
       config).then(res => {
         localStorage.setItem("authToken", res.data.access_token);
-        props.setIsLogin(true);
+        props.setLoadUser(true);
+        setProcess(false);
         history.push('/');
 })
 .catch(err => {
+    setProcess(false);
     if (err.response) {
       setError(err.response.data.message);
       setTimeout(() => {
@@ -115,7 +120,7 @@ function Signup(props) {
             <input type="password" onClick={()=>inputClicked("password_label")} onChange={(e)=>SetPassword(e.target.value)} value={password} name="password" placeholder="" autoComplete="on"/>
             </div>
         
-            <div className="signup_btn_div"><button className="signup_btn">Create Account</button></div>
+            <div className="signup_btn_div"><button className="signup_btn">{!process?"Create Account":<LoadingIcon className="process_icon" />}</button></div>
             </form>
             <p className="signup_have">Already have an account? <Link to="/login">Log in</Link></p>
         </div>

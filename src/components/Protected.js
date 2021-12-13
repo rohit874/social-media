@@ -4,7 +4,7 @@ const Protected = (props) =>{
     const history = useHistory();
     let Cmp = props.cmp;
     useEffect(() => {
-        if (!localStorage.hasOwnProperty("authToken")) {
+        if (!localStorage.hasOwnProperty("authToken") && !props.isLogin) {
             history.push('/login');
         }
     })

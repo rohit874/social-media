@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import { useHistory, useParams } from 'react-router';
 import '../styles/tweet.css';
-import  { BackIcon, CommentIcon, RetweetIcon, LikeIcon, ShareIcon, LoadingIcon, LikedIcon, InsertImgIcon } from '../icons';
+import  { BackIcon, CommentIcon, LikeIcon, ShareIcon, LoadingIcon, LoadingIcon3, LikedIcon, InsertImgIcon, BookmarksIcon, BookmarkedIcon } from '../icons';
 import Comments from './Comments';
 import axios from 'axios';
 import { userContext } from '../userContext';
@@ -21,6 +21,10 @@ function PostDetails() {
     let textAreaRef = useRef();
     const data = new FormData();
     const [findIndxs, setFindIndxs] = useState();
+    const [ ShareAlert, setShareAlert] = useState(false);
+    const [process, setProcess] = useState(false);
+    const [bookmarked, setBookmarked] = useState(false);
+
     //checking if already liked post
     useEffect(()=>{
         let findIndx;
@@ -47,6 +51,10 @@ function PostDetails() {
                 } catch (err) {
                   console.log(err);
                 }
+              }
+              let checkB = currentUser?.bookmarks.indexOf(postid) > -1;
+              if (checkB) {
+                  setBookmarked(true);
               }
             }
         loadPostData();
@@ -78,12 +86,14 @@ function PostDetails() {
 
     //post comment
     const commentHandler = () =>{
-        if (!selectedFile && text==="") {
+        let filert_text =  text.replace(/^\s+|\s+$/gm,'');
+        if (!selectedFile && filert_text.length===0) {
             return;
         }
+        setProcess(true);
         data.append("postId", postid);
         data.append("username", currentUser.username);
-        data.append("text", text);
+        data.append("text", filert_text);
         data.append("post_image", selectedFile);
         const config = {
             header: {
@@ -98,6 +108,7 @@ function PostDetails() {
         setPreview(undefined);
         setText("");
         textAreaRef.current.style.height = "50px";
+        setProcess(false);
         let appendComment = {...res.data.res, name:currentUser.name, user_image:currentUser.profile_image}
         setCommentsData([appendComment, ...commentsData]);
         })
@@ -149,6 +160,43 @@ function PostDetails() {
         let localDate = new Date(createdAt);
         return moment(localDate).format('h:mm A . MMM D, YYYY');
     }
+    const SharePostHandling = (postid) =>{
+        setShareAlert(true);
+        const el = document.createElement('input');
+        el.value = `https://social-media-6612b.web.app/post/${postid}`;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        setTimeout(() => {
+            setShareAlert(false);
+        }, 2000);
+    }
+    function BookmarkHandler(id){
+        let checkB = currentUser.bookmarks.indexOf(id) > -1;
+            if (checkB) {
+                currentUser.bookmarks = currentUser.bookmarks.filter((data)=>data!==id);
+                setBookmarked(false);
+            }
+            else{
+                currentUser.bookmarks = [...currentUser.bookmarks,id];
+                setBookmarked(true);
+            }
+        var config = {
+            headers:{
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+          }};
+          axios.post("https://social-media-rk.herokuapp.com/bookmarks",{bookmarksId:id, userid:currentUser._id}, config)
+          .then(res => {
+      })
+      .catch(err => {
+          if (err.response) {
+              console.log(err.response.data.message);
+          }
+      })
+
+    }
 
     return (
         <div className="main_container">
@@ -167,15 +215,17 @@ function PostDetails() {
                 </div>
                 </div>
                 <p>{postDetails.text}</p>
-                <img src={postDetails.post_image} alt="" />
+                {postDetails.post_image!=="https://social-media-rk.herokuapp.com/" ? <img src={postDetails.post_image} alt="" />:""}
                 <div className="tweet_date_likes"><span>{postDate(postDetails.createdAt)}</span><p><span>{postDetails.likes.length}</span> Likes</p></div>
                 <div className="post_bottom">
                     <div><CommentIcon className="post-icons" /><span>{commentsData.length}</span></div>
-                    <div><RetweetIcon className="post-icons" /><span></span></div>
+                    {/* <div><RetweetIcon className="post-icons" /><span></span></div> */}
                     <div>{like?<LikedIcon onClick={likeHandler} className="liked_icon" />
                     :<LikeIcon onClick={likeHandler} className="post-icons" />}
                     <span>{postDetails.likes.length}</span></div>
-                    <div><ShareIcon className="post-icons" /><span></span></div>
+                    {ShareAlert && <p className="copy_alert">link copied on clipboard</p>}
+                    <div><ShareIcon onClick={(e)=>{SharePostHandling(postDetails._id)}} className="post-icons" /><span></span></div>
+                    <div>{!bookmarked?<BookmarksIcon onClick={()=>BookmarkHandler(postDetails._id)} className="post-icons" />:<BookmarkedIcon onClick={()=>BookmarkHandler(postDetails._id)} className="post-icons" />}<span></span></div>
                 </div>
             </div>
         </div>
@@ -190,7 +240,7 @@ function PostDetails() {
                   <InsertImgIcon className="insert_img_icon" />
                     <input onChange={(e)=>setPreviewImage(e.target.files[0])} type='file' id='image' style={{display:"none"}} accept="image/png, image/jpeg" name='image' />
                   </label>
-                       <button className="comment_btn" onClick={commentHandler}>Comment</button></div> 
+                       <button className="comment_btn" onClick={commentHandler}>{!process?"Comment":<LoadingIcon3 className="process_icon3" />}</button></div> 
                 </div>
             </div>
             { commentsData.length ?

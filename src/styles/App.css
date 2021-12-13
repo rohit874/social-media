@@ -45,6 +45,7 @@
   top: 0;
   height: 50px;
   border-bottom: 1px solid var(--background);
+  z-index: 1;
 }
 .main_header h3{
   margin: 5px 10px;
@@ -123,7 +124,15 @@
   height: 25px;
   fill: inherit;
 }
-
+.bookmarks{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding: 5px;
+  border: 1px solid var(--shadow);
+  border-radius: 3px;
+  margin: 3px;
+}
 .content_loading{
   width: 100%;
   display: flex;

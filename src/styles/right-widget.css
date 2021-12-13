@@ -27,15 +27,16 @@
     background-color: transparent;
 }
 .whats_happening{
-    margin-top: 20px;
-    margin-left: 5px;
+    margin: 20px 5px 5px 5px;
     border-radius: 20px;
     background-color: var(--hover);
 }
 .whats_happening > h2{
-    display: inline-block;
-    margin: 15px 5px;
+    /* display: inline-block; */
+    padding: 15px 10px;
     font-size: 18px;
+    color: var(--text);
+    text-align: center;
     background-color: transparent;
 }
 .news{
@@ -46,6 +47,8 @@
     cursor: pointer;
     background-color: transparent;
     border-top: 1px solid var(--background);
+    text-decoration: none;
+    color: var(--text);
 }
 .news div{
     background-color: transparent;

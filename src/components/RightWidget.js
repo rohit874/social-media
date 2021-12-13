@@ -1,9 +1,14 @@
-import '../styles/right-widget.css'
-import news1 from '../images/news1.jpg';
-import news2 from '../images/news2.jpg';
+import '../styles/right-widget.css';
+import { useEffect, useState } from 'react';
+import { LoadingIcon } from '../icons';
 import Search from './Search';
-
+import axios from 'axios';
 function RightWidget({hideSearch}) {
+    const [articles, setArticles] = useState([]);
+    useEffect(()=>{
+        axios.get('https://saurav.tech/NewsAPI/top-headlines/category/entertainment/in.json')
+        .then(response => setArticles(response.data.articles));
+    },[])
     return (
         <div className="right-widget">
             <div className="right_widget_search">
@@ -11,22 +16,27 @@ function RightWidget({hideSearch}) {
             </div>
             <div className="whats_happening">
             <h2>What's Happening</h2>
-            <div className="news">
+            {
+            articles.length?
+            articles.map((data,i)=>{
+                if(i < 3){
+                return(
+                <a key={i} href={data.url} className="news">
                 <div>
-                    <span>IPL 2021</span>
-                    <h5>RRvMI: A battle for the playoffs as Rajasthan Royals take on Mumbai Indians at Sharjah</h5>
-                    <span>Trending with #RRvsMI</span>
+                    <h5>{data.title}</h5>
+                    <span>Source : {data.source.name}</span>
                 </div>
-                <img src={news1} alt="" />
+                <img src={data.urlToImage} alt="" />
+                </a>
+                )
+                }
+                else{return null;}
+            })
+            :
+            <div className="content_loading">
+            <LoadingIcon className="content_loading_animation" />
             </div>
-            <div className="news">
-                <div>
-                    <span>IPL 2021</span>
-                    <h5>Here's what exactly caused the six-hour Facebook outage last night</h5>
-                    <span>Trending with #Facebook</span>
-                </div>
-                <img src={news2} alt="" />
-            </div>
+            }
             </div>
         </div>
     )

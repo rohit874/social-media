@@ -3,9 +3,10 @@ import axios from 'axios';
 import '../styles/auth.css'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import {ReactComponent as LoadingIcon} from '../icons/loading_icon2.svg';
 
 
-function Login({setIsLogin}) {
+function Login({setLoadUser}) {
   const history = useHistory();
   useEffect(()=>{
     if (localStorage.hasOwnProperty('authToken')) {
@@ -24,19 +25,22 @@ function Login({setIsLogin}) {
     let [email,SetEmail] = useState("");
     let [password,SetPassword] = useState("");
     const [error, setError] = useState("");
+    const [process,setProcess] = useState(false);
 
     function GuestLogin(e){
       e.preventDefault();
       email = "rk@gmail.com";
       password = "12345678";
-       LoginHandler(e,true);
+       LoginHandler(e);
     }
 
 
     const LoginHandler = async (e) =>{
+      setProcess(true);
         e.preventDefault();
         if (!email || !password) {
           setError("please fill email and password");
+          setProcess(false);
           setTimeout(() => {
             setError("");
           }, 5000);
@@ -52,9 +56,11 @@ function Login({setIsLogin}) {
           try {
             const res = await axios.post('https://social-media-rk.herokuapp.com/login', { email, password }, config);
             localStorage.setItem("authToken", res.data.access_token);
-            setIsLogin(true);
+            setLoadUser(true);
+            setProcess(false);
             history.push('/');
           } catch (err) {
+            setProcess(false);
             console.log(err);
             if (err.response) {
                       setError(err.response.data.message);
@@ -87,7 +93,7 @@ function Login({setIsLogin}) {
             </div>
     
             <div className="signup_btn_div">
-              <button onClick={(e)=>LoginHandler(e)} className="signup_btn">Login</button>
+              <button onClick={(e)=>LoginHandler(e)} className="signup_btn">{!process?"Login":<LoadingIcon className="process_icon" />}</button>
               <button onClick={(e)=>GuestLogin(e)} className="signup_btn">Login as Guest</button>
               </div>
             </form>

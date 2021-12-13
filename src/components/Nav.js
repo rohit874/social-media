@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/nav.css';
-import  { HomeIcon, ExploreIcon ,Bird1Icon, NotificationIcon, MessageIcon, BookmarksIcon, ListsIcon, ProfileIcon, MoreIcon, CutIcon } from '../icons';
+import  { HomeIcon ,Bird1Icon, ProfileIcon, BookmarksIcon, CutIcon } from '../icons';
 import { userContext } from '../userContext';
 
 function Nav({ navStyle, setNavStyle, Logout }) {
@@ -54,13 +54,13 @@ function Nav({ navStyle, setNavStyle, Logout }) {
           </div>
           <div onClick={()=>setNavStyle(false)} className="navlinks">
             <NavLink to='/' exact className="navlink"><HomeIcon className="nav_icon" /><h2>Home</h2></NavLink>
-            <NavLink to='/explore' exact className="navlink"><ExploreIcon className="nav_icon" /><h2>Explore</h2></NavLink>
-            <NavLink to='/notification' exact className="navlink"><NotificationIcon className="nav_icon" /><h2>Notification</h2></NavLink>
-            <NavLink to='/messages' exact className="navlink"><MessageIcon className="nav_icon" /><h2>Messages</h2></NavLink>
-            <NavLink to='/bookmarks' exact className="navlink"><BookmarksIcon className="nav_icon" /><h2>Bookmarks</h2></NavLink>
-            <NavLink to='/lists' exact className="navlink"><ListsIcon className="nav_icon" /><h2>Lists</h2></NavLink>
+            {/* <NavLink to='/explore' exact className="navlink"><ExploreIcon className="nav_icon" /><h2>Explore</h2></NavLink> */}
             <NavLink to={`/${currentUser?.username}`} exact className="navlink"><ProfileIcon className="nav_icon" /><h2>Profile</h2></NavLink>
-            <NavLink to='/more' onClick={(e)=>e.preventDefault()} exact className="navlink"><MoreIcon className="nav_icon" /><h2>More</h2></NavLink>
+            {/* <NavLink to='/notification' exact className="navlink"><NotificationIcon className="nav_icon" /><h2>Notification</h2></NavLink> */}
+            {/* <NavLink to='/messages' exact className="navlink"><MessageIcon className="nav_icon" /><h2>Messages</h2></NavLink> */}
+            <NavLink to='/bookmarks' exact className="navlink"><BookmarksIcon className="nav_icon" /><h2>Bookmarks</h2></NavLink>
+            {/* <NavLink to='/lists' exact className="navlink"><ListsIcon className="nav_icon" /><h2>Lists</h2></NavLink> */}
+            {/* <NavLink to='/more' onClick={(e)=>e.preventDefault()} exact className="navlink"><MoreIcon className="nav_icon" /><h2>More</h2></NavLink> */}
           </div>
          {/* <button className="tweet_btn">Tweet</button> */}
          { currentUser ?

@@ -120,6 +120,19 @@
     color: coral;
     border: none;
 }
+.process_icon{
+    background-color: transparent;
+    fill: white;
+    width: 70px;
+    height: 15px;
+    margin-top: 3px;
+}
+.process_icon3{
+    background-color: transparent;
+    fill: white;
+    width: 70px;
+    height: 10px;
+}
 
 
 @media only screen and (min-width: 768px) {

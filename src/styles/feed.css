@@ -21,6 +21,9 @@
     object-fit: cover;
     object-position: center;
 }
+.post h4:hover{
+    text-decoration: underline;
+}
 .post_details{
     width: 100%;
     max-width: 510px;
@@ -50,8 +53,9 @@
     font-size: 13px;
     font-weight: 400;
 }
-.posted_by span:hover{
+.posted_by h4:hover{
     text-decoration: underline;
+    cursor: pointer;
 }
 .post_details p{
     background-color: transparent;
@@ -63,6 +67,7 @@
     width: 100%;
     background-color: transparent;
     display: flex;
+    position: relative;
     justify-content: space-around;
     font-size: 20px;
     color: var(--text);
@@ -78,11 +83,14 @@
     font-size: 12px;
     color: var(--text);
 }
+.comment_bottom{
+    justify-content: flex-start;
+}
 .post-icons{
     padding: 5px;
     cursor: pointer;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: transparent;
     fill: var(--text);
@@ -90,8 +98,8 @@
 .liked_icon{
     padding: 5px;
     cursor: pointer;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: transparent;
     fill: #f83475;
@@ -102,4 +110,15 @@
 }
 .liked_icon:hover{
     background: #f8347569;
+}
+.copy_alert{
+    position: absolute;
+    bottom: 40px;
+    right: 10px;
+    color: var(--text);
+    background-color: var(--background) !important;
+    box-shadow: 0 0px 8px 0 var(--shadow);
+    padding: 7px 20px;
+    border-radius: 5px;
+    transition: 1s;
 }

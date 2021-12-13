@@ -2,7 +2,7 @@ import './styles/App.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router , NavLink, Route, Switch } from 'react-router-dom';
 import { Login, Signup, Home, Nav, RightWidget, Profile, PostDetails, Notification, Explore, Messages, Bookmarks, Lists, Protected } from './components';
-import {HomeIcon, SearchIcon, NotificationIcon, MessageIcon} from './icons';
+import { HomeIcon, SearchIcon, ProfileIcon } from './icons';
 import axios from 'axios';
 import { userContext } from './userContext';
 
@@ -11,6 +11,7 @@ function App() {
   const [ currentUser , setCurrentUser] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const[hideSearch, setHideSearch] = useState(false);
+  const[loadUser, setLoadUser] = useState(false);
   //handling right widget search input
   const updateHideSearch=()=>{
     setHideSearch(false);
@@ -38,7 +39,7 @@ function App() {
       }
       loadUserData();
     }
-  },[isLogin]);
+  },[loadUser]);
 
   const Logout = () => {
     localStorage.removeItem('authToken');
@@ -50,10 +51,10 @@ return (
     <>
     <Router>
       <Route path="/login">
-        <Login setIsLogin={setIsLogin} />
+        <Login setLoadUser={setLoadUser} />
       </Route>
       <Route path="/signup">
-        <Signup setIsLogin={setIsLogin} />
+        <Signup setLoadUser={setLoadUser} />
       </Route>
     <userContext.Provider value={{ currentUser }}>
       <div className="app">
@@ -61,35 +62,35 @@ return (
       <div className="main">
     <Switch>
       <Route path="/" exact>
-      <Protected  cmp={<Home setNavStyle={setNavStyle} />} setNavStyle={setNavStyle} />
+      <Protected isLogin={isLogin}  cmp={<Home setNavStyle={setNavStyle} />} />
       </Route>
       <Route path="/explore">
-      <Protected  cmp={<Explore updateHideSearch={updateHideSearch} setHideSearch={setHideSearch} />} />
+      <Protected isLogin={isLogin}  cmp={<Explore updateHideSearch={updateHideSearch} setHideSearch={setHideSearch} />} />
       </Route>
       <Route path="/notification">
-      <Protected  cmp={<Notification />} />
+      <Protected isLogin={isLogin}  cmp={<Notification />} />
       </Route>
       <Route path="/messages">
-      <Protected  cmp={<Messages />} />
+      <Protected isLogin={isLogin}  cmp={<Messages />} />
       </Route>
       <Route path="/bookmarks">
-      <Protected  cmp={<Bookmarks />} />
+      <Protected isLogin={isLogin}  cmp={<Bookmarks />} />
       </Route>
       <Route path="/lists">
-      <Protected  cmp={<Lists />} />
+      <Protected isLogin={isLogin}  cmp={<Lists />} />
       </Route>
       <Route path="/post/:postid">
-      <Protected  cmp={<PostDetails />} />
+      <Protected isLogin={isLogin}  cmp={<PostDetails />} />
       </Route>
       <Route path="/:username">
-      <Protected  cmp={<Profile />} />
+      <Protected isLogin={isLogin}  cmp={<Profile />} />
       </Route>
     </Switch>
     <div className="mobile_nav_bottom">
       <NavLink to="/" exact> <HomeIcon className="m_nav_icon" /></NavLink>
       <NavLink to="/explore" exact><SearchIcon className="m_nav_icon" /></NavLink>
-      <NavLink to="/notification" exact><NotificationIcon className="m_nav_icon" /></NavLink>
-      <NavLink to="/messages" exact><MessageIcon className="m_nav_icon" /></NavLink>
+      <NavLink to={`/${currentUser?.username}`} exact><ProfileIcon className="m_nav_icon" /></NavLink>
+      {/* <NavLink to="/messages" exact><MessageIcon className="m_nav_icon" /></NavLink> */}
     </div>
     </div>
     <RightWidget hideSearch={hideSearch} />   
